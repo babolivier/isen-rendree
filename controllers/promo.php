@@ -2,7 +2,7 @@
 
 function promo()
 {
-    // TODO
+    return html("promo.html.php");
 }
 
 function add_promo()

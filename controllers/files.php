@@ -2,7 +2,7 @@
 
 function files()
 {
-    // TODO
+    return html("files.html.php");
 }
 
 function add_file()

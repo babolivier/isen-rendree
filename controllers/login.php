@@ -2,7 +2,7 @@
 
 function login()
 {
-    // TODO
+    return html("login.html.php");
 }
 
 function check_login()

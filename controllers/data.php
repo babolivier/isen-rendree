@@ -2,7 +2,7 @@
 
 function data()
 {
-    // TODO
+    return html("data.html.php");
 }
 
 function data_extract()
