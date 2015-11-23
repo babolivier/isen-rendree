@@ -93,7 +93,7 @@ class Connector {
         foreach($values as $name=>$value) {
             $request .= $name.",";
             $valeurs .= "?,";
-                array_push($arrayVerif, $value);
+            array_push($arrayVerif, $value);
         }
 
         $request = substr($request, 0, -1).") ".substr($valeurs, 0, -1).")";

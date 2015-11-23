@@ -1,8 +1,8 @@
 <?php
 try {
-    include("models/data.class.php");
-    $csv = Data::extract();
-    echo $csv;
+    include("models/promo.class.php");
+    $promo = new Promo("test");
+    $promo->erase();
 } catch(Exception $e) {
     echo $e;
 }
