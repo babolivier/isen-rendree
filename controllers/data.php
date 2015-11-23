@@ -1,13 +1,19 @@
 <?php
 
+include_once(dirname(__DIR__)."../models/data.class.php");
+
 function data()
 {
-    return html('data.html.php');
+    set("title", "Titre");
+    
+    return html("data.html.php", "layout.html.php");
 }
 
 function data_extract()
 {
-    // TODO
+    header("Content-Type: text/csv");
+    
+    echo Data::extract();
 }
 
 function alter_data()

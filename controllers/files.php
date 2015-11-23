@@ -2,7 +2,9 @@
 
 function files()
 {
-    return html('files.html.php');
+    set("title", "Titre");
+    
+    return html("files.html.php", "layout.html.php");
 }
 
 function add_file()

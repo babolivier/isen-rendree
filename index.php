@@ -20,5 +20,3 @@ dispatch_delete("/files/:fileid",  "delete_file");
 dispatch_delete("/promo/:promoid", "delete_promo");
 
 run();
-
-?>

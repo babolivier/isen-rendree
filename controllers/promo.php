@@ -2,7 +2,9 @@
 
 function promo()
 {
-    return html('promo.html.php');
+    set("title", "Titre");
+    
+    return html("promo.html.php", "layout.html.php");
 }
 
 function add_promo()
