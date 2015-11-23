@@ -15,25 +15,25 @@
 *        Insert()                                                              *
 *        Update()                                                              *
 *******************************************************************************/
+
+include(dirname(__DIR__)."../../DbIds.php");
+
 class Connector {
 
     private $bdd;
 
     function __construct() {
-        // TODO : Select params to use
-        $dbconnect = array();
-        for($i = 0; $i < sizeof($matches[0]); $i++) {
-            $dbconnect[$matches[1][$i]] = $matches[2][$i];
-        }
+        $dbconnect = getParams();
 
         $options = array(
-            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
         );
 
-        $this->bdd = new PDO("mysql:host=".$dbconnect["host"].";dbname="
-                .$dbconnect["dbname"], $dbconnect["user"], $dbconnect["pass"],
-                $options);
+        $this->bdd = new PDO("mysql:host=".$dbconnect[0].";dbname=".$dbconnect[1],
+            $dbconnect[2], $dbconnect[3], $options);
+
         $this->bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->bdd->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     }
 
     function Select($fields, $tables, $options = array()) {
@@ -44,7 +44,7 @@ class Connector {
                 $whereClause = " $upName ";
                 foreach($value as $array) {
                     if(sizeof($array) != 3 && sizeof($array) != 4) {
-                        throw new Exception('wrong_arg_nmbr_where');
+                        throw new Exception("wrong_arg_nmbr_where");
                     }
                     if(sizeof($array) == 3) {
                         $whereClause .= $array[0]." ".$array[1]." ? AND ";
@@ -57,10 +57,10 @@ class Connector {
                 $request .= substr($whereClause, 0, -5);
             } else if(($upName = strtoupper($name)) == "ORDER BY") {
                 if(sizeof($value) != 2 && substr($value[0], -2) != "()") {
-                    throw new Exception('wrong_arg_nmbr_order_by');
+                    throw new Exception("wrong_arg_nmbr_order_by");
                 }
 
-                $request .= " ".$upName." ".implode(' ', $value);
+                $request .= " ".$upName." ".implode(" ", $value);
             } else if(($upName = strtoupper($name)) == "LIMIT") {
                 if(sizeof($value) == 1) {
                     // La colonne "limit" ne contient qu'un nombre de champs
@@ -70,10 +70,10 @@ class Connector {
                     // nombre de champs
                     $request .= " $upName ".$value[0].",".$value[1];
                 } else {
-                    throw new Exception('wrong_arg_numbr_limit');
+                    throw new Exception("wrong_arg_numbr_limit");
                 }
             } else {
-                throw new Exception('unknown_arg');
+                throw new Exception("unknown_arg");
             }
         }
 
@@ -106,12 +106,26 @@ class Connector {
     function Update($table, $update) {
         $request = "UPDATE $table SET ";
         $arrayVerif = array();
-        foreach($update['set'] as $name=>$value) {
+        foreach($update["set"] as $name=>$value) {
             $request .= $name."=?,";
             array_push($arrayVerif, $value);
         }
         $request = substr($request, 0, -1)." WHERE ";
-        foreach($update['where'] as $value) {
+        foreach($update["where"] as $value) {
+            $request .= $value[0].$value[1]."? AND ";
+            array_push($arrayVerif, $value[2]);
+        }
+        $request = substr($request, 0, -5);
+
+        $stmt = $this->bdd->prepare($request);
+        $stmt->execute($arrayVerif);
+    }
+
+    function Delete($table, $where = array()) {
+        $request = "DELETE FROM $table";
+        $arrayVerif = array();
+        $request .= " WHERE ";
+        foreach($where as $value) {
             $request .= $value[0].$value[1]."? AND ";
             array_push($arrayVerif, $value[2]);
         }
