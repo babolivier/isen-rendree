@@ -1,8 +1,9 @@
 <?php
 
-require_once(dirname(__DIR__)."connector.class.php");
+require_once(dirname(__DIR__) . "connector.class.php");
 
-class Data {
+class Data
+{
     private $identifiant;
     private $nom_fils;
     private $prenom_fils;
@@ -12,7 +13,8 @@ class Data {
     private $date;
     private $ip;
 
-    function __construct($email) {
+    function __construct($email)
+    {
         $bdd = new Connector();
 
         $data = $bdd->Select("*", "data", array(
@@ -160,7 +162,8 @@ class Data {
         $this->ip = $ip;
     }
 
-    function write() {
+    function write()
+    {
         $bdd = new Connector();
 
         $data = $bdd->Select("*", "data", array(
@@ -172,8 +175,8 @@ class Data {
         $attrs = get_object_vars($this);
         $toUpdate = array();
 
-        foreach($attrs as $key=>$value) {
-            if($value != $data[$key]) {
+        foreach ($attrs as $key => $value) {
+            if ($value != $data[$key]) {
                 $toUpdate[$key] = $value;
             }
         }
@@ -184,7 +187,8 @@ class Data {
         ));
     }
 
-    public static function extract() {
+    public static function extract()
+    {
         $bdd = new Connector();
         $data = $bdd->Select("*", "data");
 
@@ -192,13 +196,13 @@ class Data {
 
         // Head line
         $keys = array();
-        foreach($data[0] as $key=>$value) {
+        foreach ($data[0] as $key => $value) {
             array_push($keys, $key);
         }
-        $csv .= implode(",", $keys)."\n";
+        $csv .= implode(",", $keys) . "\n";
 
         // Content
-        foreach($data as $student) {
+        foreach ($data as $student) {
             $csv .= implode(",", $student);
             $csv .= "\n";
         }
@@ -206,7 +210,14 @@ class Data {
         return $csv;
     }
 
-    function erase() {
+    public static function getAll()
+    {
+        $bdd = new Connector();
+        return $bdd->Select("*", "data");
+    }
+
+    function erase()
+    {
         $bdd = new Connector();
         $bdd->Delete("data", array(array("identifiant", "=", $this->identifiant)));
     }
