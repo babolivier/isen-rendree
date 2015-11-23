@@ -2,7 +2,7 @@
 
 function files()
 {
-    return html("files.html.php");
+    return html('files.html.php');
 }
 
 function add_file()
@@ -19,5 +19,3 @@ function delete_file()
 {
     // TODO
 }
-
-?>

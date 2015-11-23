@@ -2,7 +2,7 @@
 
 function promo()
 {
-    return html("promo.html.php");
+    return html('promo.html.php');
 }
 
 function add_promo()
@@ -19,5 +19,3 @@ function delete_promo()
 {
     // TODO
 }
-
-?>

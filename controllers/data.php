@@ -2,7 +2,7 @@
 
 function data()
 {
-    return html("data.html.php");
+    return html('data.html.php');
 }
 
 function data_extract()
@@ -14,5 +14,3 @@ function alter_data()
 {
     // TODO
 }
-
-?>
