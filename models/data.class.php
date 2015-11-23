@@ -1,6 +1,6 @@
 <?php
 
-require_once("connector.class.php");
+require_once(dirname(__DIR__)."connector.class.php");
 
 class Data {
     private $identifiant;
