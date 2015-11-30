@@ -18,7 +18,7 @@ class Promo
 
         if($promo == NULL)
         {
-            throw new Exception("La promo n'existe pas");
+            throw new LengthException("La promo n'existe pas");
         }
 
         $this->id_promo = $promo["id_promo"];
@@ -72,6 +72,11 @@ class Promo
                 array("id_promo", "=", $this->id_promo)
             )
         ))[0];
+
+        if(!$promo)
+        {
+            throw new UnexpectedValueException("La promo n'existe plus en base de données");
+        }
 
         $attrs = get_object_vars($this);
         $toUpdate = array();

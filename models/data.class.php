@@ -25,7 +25,7 @@ class Data
 
         if($data == NULL)
         {
-            throw new Exception("Les données n'existent pas");
+            throw new LengthException("Les données n'existent pas");
         }
 
         // Chargement des informations
@@ -177,6 +177,11 @@ class Data
             )
         ))[0];
 
+        if(!$data)
+        {
+            throw new UnexpectedValueException("Les données n'existent plus en base de données");
+        }
+
         $attrs = get_object_vars($this);
         $toUpdate = array();
 
@@ -196,6 +201,11 @@ class Data
     {
         $bdd = new Connector();
         $data = $bdd->Select("*", "data");
+
+        if(!$data)
+        {
+            throw new LengthException("Aucune donnée présente en base de données");
+        }
 
         $csv = "";
 

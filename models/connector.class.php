@@ -36,6 +36,13 @@ class Connector {
         $this->bdd->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     }
 
+    /**
+     * @param string $fields Fields to select
+     * @param string $tables Tables to select from
+     * @param mixed[] $options Array filled with the selection options, such as "WHERE", "ORDER BY" and "LIMIT"
+     * @return mixed[]|null Array of values if the request went OK, NULL else
+     * @throws InvalidArgumentException There was an error within the arguments array
+     */
     function Select($fields, $tables, $options = array()) {
         $request = "SELECT $fields FROM $tables ";
         $arrayVerif = array();
@@ -44,7 +51,7 @@ class Connector {
                 $whereClause = " $upName ";
                 foreach($value as $array) {
                     if(sizeof($array) != 3 && sizeof($array) != 4) {
-                        throw new Exception("wrong_arg_nmbr_where");
+                        throw new InvalidArgumentException("wrong_arg_nmbr_where");
                     }
                     if(sizeof($array) == 3) {
                         $whereClause .= $array[0]." ".$array[1]." ? AND ";
@@ -57,7 +64,7 @@ class Connector {
                 $request .= substr($whereClause, 0, -5);
             } else if(($upName = strtoupper($name)) == "ORDER BY") {
                 if(sizeof($value) != 2 && substr($value[0], -2) != "()") {
-                    throw new Exception("wrong_arg_nmbr_order_by");
+                    throw new InvalidArgumentException("wrong_arg_nmbr_order_by");
                 }
 
                 $request .= " ".$upName." ".implode(" ", $value);
@@ -70,10 +77,10 @@ class Connector {
                     // nombre de champs
                     $request .= " $upName ".$value[0].",".$value[1];
                 } else {
-                    throw new Exception("wrong_arg_numbr_limit");
+                    throw new InvalidArgumentException("wrong_arg_numbr_limit");
                 }
             } else {
-                throw new Exception("unknown_arg");
+                throw new InvalidArgumentException("unknown_arg");
             }
         }
 
@@ -86,6 +93,10 @@ class Connector {
         }
     }
 
+    /**
+     * @param string $table Name of the table where the insertion takes place
+     * @param string[] $values Array of values to insert in the database
+     */
     function Insert($table, $values) {
         $request = "INSERT INTO $table(";
         $valeurs = "VALUES(";
@@ -103,6 +114,11 @@ class Connector {
         $stmt->execute($arrayVerif);
     }
 
+    /**
+     * @param string $table Name of the table where the update takes place
+     * @param mixed[] $update Array of fields to update with new values, with a "set"
+     *                          row filled with values, and a "where" row with conditions
+     */
     function Update($table, $update) {
         $request = "UPDATE $table SET ";
         $arrayVerif = array();
@@ -121,6 +137,10 @@ class Connector {
         $stmt->execute($arrayVerif);
     }
 
+    /**
+     * @param string $table Name of the table where the deletion takes place
+     * @param mixed[] $where Array of conditions to select the right row(s) to delete
+     */
     function Delete($table, $where = array()) {
         $request = "DELETE FROM $table";
         $arrayVerif = array();

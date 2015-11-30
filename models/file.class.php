@@ -21,7 +21,7 @@ class File
 
         if(!$document)
         {
-            throw new Exception("Le fichier n'existe pas");
+            throw new LengthException("Le fichier n'existe pas");
         }
 
         $this->id = $document["id"];
@@ -33,6 +33,13 @@ class File
 
     public static function addDocument($document)
     {
+        foreach($document as $key=>$value)
+        {
+            if(empty($value) && $key != "promo" && $key != "id")
+            {
+                throw InvalidArgumentException("La colonne `".$key."` doit être définie");
+            }
+        }
         $bdd = new Connector();
         $bdd->Insert("document", array(
             "id" => $document["id"],
@@ -63,7 +70,7 @@ class File
 
         if(!$promo)
         {
-            throw new Exception("La promo n'existe pas");
+            throw new LengthException("La promo n'existe pas");
         }
 
         // Change promo in both object and BDD
