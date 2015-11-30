@@ -16,6 +16,11 @@ class Promo
             )
         ))[0];
 
+        if($promo == NULL)
+        {
+            throw new Exception("La promo n'existe pas");
+        }
+
         $this->id_promo = $promo["id_promo"];
         $this->libelle = $promo["libelle"];
     }
@@ -89,12 +94,12 @@ class Promo
         $bdd->Delete("promo", array(array("id_promo", "=", $this->id_promo)));
     }
 
-    public static function addPromo($id, $libelle)
+    public static function addPromo($promo)
     {
         $bdd = new Connector();
         $bdd->Insert("promo", array(
-            "id_promo" => $id,
-            "libelle" => $libelle
+            "id_promo" => $promo["id"],
+            "libelle" => $promo["libelle"]
         ));
     }
 }

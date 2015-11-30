@@ -16,7 +16,7 @@
 *        Update()                                                              *
 *******************************************************************************/
 
-include(dirname(__DIR__)."../../DbIds.php");
+include(__DIR__."/../../DbIds.php");
 
 class Connector {
 

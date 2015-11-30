@@ -23,6 +23,11 @@ class Data
             )
         ))[0];
 
+        if($data == NULL)
+        {
+            throw new Exception("Les données n'existent pas");
+        }
+
         // Chargement des informations
         $this->identifiant = $email;
         $this->nom_fils = $data["nom_fils"];
