@@ -1,10 +1,11 @@
 <?php
 
-include_once(dirname(__DIR__)."../models/data.class.php");
+require_once(dirname(__DIR__)."/models/data.class.php");
 
 function data()
 {
     set("title", "Titre");
+    set("data", Data::getAll());
     
     return html("data.html.php", "layout.html.php");
 }
@@ -12,8 +13,9 @@ function data()
 function data_extract()
 {
     header("Content-Type: text/csv");
+    header("Content-Disposition: filename=\"data.csv\"");
     
-    echo Data::extract();
+    return Data::extract();
 }
 
 function alter_data()
