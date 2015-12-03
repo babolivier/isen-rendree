@@ -177,12 +177,14 @@ class Data
             "where" => array(
                 array("identifiant", "=", $this->identifiant)
             )
-        ))[0];
+        ));
 
         if(!$data)
         {
             throw new UnexpectedValueException("Les données n'existent plus en base de données");
         }
+
+        $data = $data[0];
 
         $attrs = get_object_vars($this);
         $toUpdate = array();

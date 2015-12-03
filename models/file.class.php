@@ -17,12 +17,14 @@ class File
             "where" => array(
                 array("id", "=", $id)
             )
-        ))[0];
+        ));
 
         if(!$document)
         {
             throw new LengthException("Le fichier n'existe pas");
         }
+
+        $document = $document[0];
 
         $this->id = $document["id"];
         $this->rang = $document["rang"];
@@ -66,7 +68,7 @@ class File
             "where" => array(
                 array("promo_id", "=", $newPromo)
             )
-        ))[0];
+        ));
 
         if(!$promo)
         {
