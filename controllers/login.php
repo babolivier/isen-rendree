@@ -17,10 +17,13 @@ function check_login()
     
     if($_POST["login"] != $identifiers[0] || $_POST["password"] != $identifiers[1])
     {
-        set("title", "Error");
+        set("title", "Erreur");
         set("error", true);
     } else
+    {
+        set("title", "Accueil");
         set("error", false);
+    }
     
     return html("login.html.php", "layout.html.php");
 }
