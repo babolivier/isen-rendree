@@ -21,12 +21,14 @@ class Data
             "where" => array(
                 array("identifiant", "=", $email)
             )
-        ))[0];
+        ));
 
         if($data == NULL)
         {
             throw new LengthException("Les données n'existent pas");
         }
+
+        $data = $data[0];
 
         // Chargement des informations
         $this->identifiant = $email;
