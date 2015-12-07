@@ -2,7 +2,7 @@
     <div id="wrapper">
         <div id="login" class="animate form">
             <section class="login_content">
-                <form>
+                <form method="POST">
                     <h1>Connexion</h1>
                     <div>
                         <input type="text" class="form-control" placeholder="Nom d'utilisateur" required="" name="login" />
@@ -11,8 +11,8 @@
                         <input type="password" class="form-control" placeholder="Mot de passe" required="" name="password" />
                     </div>
                     <div>
-                        <a class="btn btn-default submit" href="index.html">Log in</a>
-                        <a class="reset_pass" href="#">Lost your password?</a>
+                        <input type="submit" class="btn btn-default submit" value="Login">
+                        <a class="reset_pass" href="#">Lost your password ?</a>
                     </div>
                     <div class="clearfix"></div>
                     <div class="separator">
