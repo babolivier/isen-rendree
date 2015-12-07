@@ -16,14 +16,9 @@ function check_login()
     $identifiers = getAdminIdentifiers();
     
     if($_POST["login"] != $identifiers[0] || $_POST["password"] != $identifiers[1])
-    {
-        set("title", "Erreur");
-        set("error", true);
-    } else
-    {
-        set("title", "Accueil");
-        set("error", false);
-    }
+        return login();
     
-    return html("login.html.php", "layout.html.php");
+    set("title", "Home");
+    
+    return html("home.html.php", "layout.html.php");
 }

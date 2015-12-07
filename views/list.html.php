@@ -1,10 +1,10 @@
 <ul>
     <?php
-        foreach($data as $student)
+        foreach($data as $item)
         {
             echo "<li><ul>";
             
-            foreach($student as $field => $value)
+            foreach($item as $field => $value)
                 echo "<li>".$field." : ".$value."</li>";
             
             echo "</li></ul>";

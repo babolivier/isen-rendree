@@ -1,10 +1,13 @@
 <?php
 
+require_once(dirname(__DIR__)."/models/promo.class.php");
+
 function promo()
 {
     set("title", "Titre");
+    set("data", Promo::getAll());
     
-    return html("promo.html.php", "layout.html.php");
+    return html("list.html.php", "layout.html.php");
 }
 
 function add_promo()

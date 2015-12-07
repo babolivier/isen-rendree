@@ -7,7 +7,7 @@ function data()
     set("title", "Titre");
     set("data", Data::getAll());
     
-    return html("data.html.php", "layout.html.php");
+    return html("list.html.php", "layout.html.php");
 }
 
 function data_extract()
