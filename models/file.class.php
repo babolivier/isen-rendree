@@ -33,22 +33,45 @@ class File
         $this->fichier = $document["fichier"];
     }
 
-    public static function addDocument($document)
+    public static function addDocument($document, $options)
     {
-        foreach($document as $key=>$value)
+        $filename = $document["name"];
+
+        // Check for upload error
+        if($document["error"])
         {
-            if(empty($value) && $key != "promo" && $key != "id")
+            throw new InvalidArgumentException("Une erreur s'est produite lors de l'envoi du fichier (".$document["error"].")");
+        }
+
+        // Determining the folder to put the document in
+        if(strstr($filename, "A1") || strstr($filename, "A2"))
+        {
+            $destination = "A12/".$filename;
+        }
+        elseif(strstr($filename, "A3") || strstr($filename, "A4") || strstr($filename, "A5"))
+        {
+            $destination = "A345/".$filename;
+        }
+        else
+        {
+            $destination = $filename;
+        }
+
+        move_uploaded_file($document["tmp_name"], __DIR__."../../pdf/".$destination);
+
+        foreach($options as $key=>$value)
+        {
+            if(empty($value) && $key != "promo")
             {
-                throw InvalidArgumentException("La colonne `".$key."` doit être définie");
+                throw new InvalidArgumentException("La colonne `".$key."` doit être définie");
             }
         }
         $bdd = new Connector();
         $bdd->Insert("document", array(
-            "id" => $document["id"],
-            "rang" => $document["rang"],
-            "promo" => $document["promo"],
-            "libelle" => $document["libelle"],
-            "fichier" => $document["fichier"]
+            "rang" => $options["rang"],
+            "promo" => $options["promo"],
+            "libelle" => $options["libelle"],
+            "fichier" => $destination
         ));
     }
 
