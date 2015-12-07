@@ -2,7 +2,7 @@
 
 require_once("connector.class.php");
 
-class File
+class Document
 {
     private $id;
     private $rang;

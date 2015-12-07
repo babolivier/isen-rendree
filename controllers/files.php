@@ -1,6 +1,6 @@
 <?php
 
-require_once(dirname(__DIR__)."/models/file.class.php");
+require_once(dirname(__DIR__) . "/models/document.class.php");
 
 function files()
 {
