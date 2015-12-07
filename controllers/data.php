@@ -20,5 +20,14 @@ function data_extract()
 
 function alter_data()
 {
-    // TODO
+    $data = new Data($_POST["email"]);
+    
+    $data->setIdentifiant($_POST["identifiant"]);
+    $data->setNomFils($_POST["nom_fils"]);
+    $data->setPrenomFils($_POST["prenom_fils"]);
+    $data->setDdnFils($_POST["ddn_fils"]);
+    $data->setTelMobile($_POST["tel_mobile"]);
+    $data->setDate($_POST["date"]);
+    $data->setIp($_POST["ip"]);
+    $data->write();
 }

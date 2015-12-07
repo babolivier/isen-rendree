@@ -12,15 +12,21 @@ function promo()
 
 function add_promo()
 {
-    // TODO
+    Promo::addPromo([
+        "id" => $_POST["id"],
+        "libelle" => $_POST["libelle"]
+    ]);
 }
 
 function alter_promo()
 {
-    // TODO
+    $promo = new Promo($_POST["id"]);
+    
+    $promo->setLibelle($_POST["libelle"]);
+    $promo->write();
 }
 
 function delete_promo()
 {
-    // TODO
+    (new Promo($_POST["promo"]))->erase();
 }

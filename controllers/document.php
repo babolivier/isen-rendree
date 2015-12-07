@@ -12,17 +12,21 @@ function document()
 
 function add_document()
 {
-    $options = [];
-    
-    foreach(["rang", "promo", "libelle"] as $field)
-        $options[$field] = $_POST[$field];
-    
-    File::addDocument($_FILES["document"], $options);
+    File::addDocument($_FILES["document"], [
+        "rang" => $_POST["rang"],
+        "promo" => $_POST["promo"],
+        "libelle" => $_POST["libelle"]
+    ]);
 }
 
 function alter_document()
 {
-    // TODO
+    $document = new Document($_POST["id"]);
+    
+    $document->setRang($_POST["rang"]);
+    $document->setPromo($_POST["promo"]);
+    $document->setLibelle($_POST["libelle"]);
+    $document->setFichier($_POST["fichier"]);
 }
 
 function delete_document()
