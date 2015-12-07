@@ -33,6 +33,12 @@ class Document
         $this->fichier = $document["fichier"];
     }
 
+    public static function getAll()
+    {
+        $bdd = new Connector();
+        return $bdd->Select("*", "document");
+    }
+
     public static function addDocument($document, $options)
     {
         $filename = $document["name"];

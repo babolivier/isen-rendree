@@ -2,15 +2,15 @@
 
 require_once(dirname(__DIR__) . "/models/document.class.php");
 
-function files()
+function document()
 {
     set("title", "Titre");
-    set("data", File::getAll());
+    set("data", Document::getAll());
     
     return html("list.html.php", "layout.html.php");
 }
 
-function add_file()
+function add_document()
 {
     $options = [];
     
@@ -20,12 +20,12 @@ function add_file()
     File::addDocument($_FILES["document"], $options);
 }
 
-function alter_file()
+function alter_document()
 {
     // TODO
 }
 
-function delete_file()
+function delete_document()
 {
     (new File($_POST["id"]))->erase();
 }

@@ -5,7 +5,7 @@ require_once("lib/limonade.php");
 dispatch_get("/",                  "login");
 dispatch_get("/data",              "data");
 dispatch_get("/data/extract",      "data_extract");
-dispatch_get("/files",             "files");
+dispatch_get("/document",          "document");
 dispatch_get("/promo",             "promo");
 
 dispatch_post("/",                 "check_login");
