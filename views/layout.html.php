@@ -6,26 +6,30 @@
         <title>
             <?php echo $title; ?>
         </title>
-        
-        <link href="lib/css/bootstrap.min.css" rel="stylesheet">
-
-        <link href="lib/fonts/css/font-awesome.min.css" rel="stylesheet">
-        <link href="lib/css/animate.min.css" rel="stylesheet">
-
-        <link href="lib/css/custom.css" rel="stylesheet">
-        <link href="lib/css/icheck/flat/green.css" rel="stylesheet">
-
-
-        <script src="lib/js/jquery.min.js"></script>
-
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+        <link rel="stylesheet" href="lib/bootstrap.min.css" />
+        <script src="lib/bootstrap.min.js"></script>
     </head>
-    <body style="background:#F7F7F7;">
-        <ul>
+    <body>
+
+
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Administration rentrée ISEN Brest</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="data">Données</a></li>
+                        <li><a href="document">Documents</a></li>
+                        <li><a href="promo">Promotions</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+
+        <div class="container">
             <?php echo $content; ?>
-        </ul>
+        </div>
     </body>
+
 </html>
