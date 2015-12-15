@@ -7,6 +7,19 @@
 <form class="collapse" id="addForm">
     <div class="well">
         <div class="form-group">
+            <label for="promo">Promotion :</label>
+            <select>
+                <?php foreach($promos as $promo)
+                {
+                    ?>
+                    <option value="<?php echo $promo["id_promo"]; ?>"><?php echo $promo["libelle"]; ?></option>
+                    <?php
+                }
+                ?>
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
             <label for="rang">Rang :</label>
             <input type="number" class="form-control" />
         </div>
