@@ -7,6 +7,7 @@ function document()
 {
     set("title", "Titre");
     set("data", Document::getAll());
+    set("promos", Promo::getAll());
 
     return html("list.html.php", "layout.html.php");
 }

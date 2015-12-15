@@ -6,7 +6,6 @@ function data()
 {
     set("title", "Titre");
     set("data", Data::getAll());
-    set("promos", Promo::getAll());
     
     return html("list.html.php", "layout.html.php");
 }
