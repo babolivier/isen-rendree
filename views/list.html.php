@@ -1,8 +1,27 @@
-<table class="table">
+<div style="text-align:right">
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addForm" aria-expanded="false" aria-controls="addForm">
+        Ajouter
+    </button>
+</div>
+
+<form class="collapse" id="addForm">
+    <div class="well">
+        <div class="form-group">
+            <label for="rang">Rang :</label>
+            <input type="number" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="libelle">Libellé : </label>
+            <input type="text" class="form-control" id="libelle" placeholder="Libellé" />
+        </div>
+    </div>
+</form>
+
+<table class="table tablesorter table-striped" id="mainTable">
     <thead>
     <?php foreach ($data[0] as $key => $value) {
         ?>
-        <th><?php echo $key; ?></th>
+        <th class="th-inner sortable both"><?php echo $key; ?></th>
         <?php
     }
     ?>

@@ -7,6 +7,8 @@
             <?php echo $title; ?>
         </title>
         <link rel="stylesheet" href="lib/bootstrap.min.css" />
+        <script src="lib/jquery-2.1.4.min.js"></script>
+        <script src="lib/jquery.tablesorter.min.js"></script>
         <script src="lib/bootstrap.min.js"></script>
     </head>
     <body>
@@ -30,6 +32,11 @@
         <div class="container">
             <?php echo $content; ?>
         </div>
+        <script>
+            $(function(){
+                $("#mainTable").tablesorter();
+            });
+        </script>
     </body>
 
 </html>
