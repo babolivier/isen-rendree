@@ -4,7 +4,7 @@ require_once(dirname(__DIR__)."/models/promo.class.php");
 
 function promo()
 {
-    set("title", "Titre");
+    set("title", "Promotions");
     set("data", Promo::getAll());
     
     return html("list.html.php", "layout.html.php");

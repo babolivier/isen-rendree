@@ -64,12 +64,17 @@ class Document
 
         // Determining the folder to put the document in
         if (strstr($filename, "A1") || strstr($filename, "A2")) {
+            error_log("A1\n");
             $destination = "A12/" . $filename;
         } elseif (strstr($filename, "A3") || strstr($filename, "A4") || strstr($filename, "A5")) {
+            error_log("A3\n");
             $destination = "A345/" . $filename;
         } else {
+            error_log("meh\n");
             $destination = $filename;
         }
+
+        error_log($destination);
 
         move_uploaded_file($document["tmp_name"], __DIR__ . "../../pdf/" . $destination);
 

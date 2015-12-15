@@ -8,7 +8,7 @@
     <div class="well">
         <div class="form-group">
             <label for="promo">Promotion :</label>
-            <select>
+            <select id="promo">
                 <?php foreach($promos as $promo)
                 {
                     ?>
@@ -21,11 +21,18 @@
         </div>
         <div class="form-group">
             <label for="rang">Rang :</label>
-            <input type="number" class="form-control" />
+            <input type="number" class="form-control" id="rang" />
         </div>
         <div class="form-group">
             <label for="libelle">Libellé : </label>
             <input type="text" class="form-control" id="libelle" placeholder="Libellé" />
+        </div>
+        <div class="form-group">
+            <label for="file">Fichier :</label>
+            <input type="file" id="file" />
+        </div>
+        <div class="form-group">
+            <input type="submit" class="form-control" value="Ajouter le document" id="formsubmit" />
         </div>
     </div>
 </form>

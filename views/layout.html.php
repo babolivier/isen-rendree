@@ -37,6 +37,7 @@
                 $("#mainTable").tablesorter();
             });
         </script>
+        <script src="lib/platypuce.js"></script>
     </body>
 
 </html>

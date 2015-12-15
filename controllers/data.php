@@ -4,7 +4,7 @@ require_once(dirname(__DIR__)."/models/data.class.php");
 
 function data()
 {
-    set("title", "Titre");
+    set("title", "Données");
     set("data", Data::getAll());
     
     return html("list.html.php", "layout.html.php");

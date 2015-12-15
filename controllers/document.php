@@ -5,7 +5,7 @@ require_once(dirname(__DIR__) . "/models/promo.class.php");
 
 function document()
 {
-    set("title", "Titre");
+    set("title", "Document");
     set("data", Document::getAll());
     set("promos", Promo::getAll());
 
@@ -14,24 +14,14 @@ function document()
 
 function add_document()
 {
-    File::addDocument($_FILES["document"], [
+    Document::addDocument($_FILES["document"], [
         "rang" => $_POST["rang"],
         "promo" => $_POST["promo"],
         "libelle" => $_POST["libelle"]
     ]);
 }
 
-function alter_document()
+function delete_document($fileid)
 {
-    $document = new Document($_POST["id"]);
-    
-    $document->setRang($_POST["rang"]);
-    $document->setPromo($_POST["promo"]);
-    $document->setLibelle($_POST["libelle"]);
-    $document->setFichier($_POST["fichier"]);
-}
-
-function delete_document()
-{
-    (new File($_POST["id"]))->erase();
+    (new Document($fileid))->erase();
 }
