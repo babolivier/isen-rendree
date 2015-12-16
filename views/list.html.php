@@ -1,40 +1,64 @@
-<div style="text-align:right">
+<?php if($title == "Documents" || $title == "Promotions")
+{
+    echo '<div style="text-align:right">
     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addForm" aria-expanded="false" aria-controls="addForm">
         Ajouter
     </button>
-</div>
+</div>';
+}
+?>
+
 
 <form class="collapse" id="addForm">
-    <div class="well">
+    <?php
+        switch($title)
+        {
+            case "Documents":
+                echo '<div class="well">
         <div class="form-group">
             <label for="promo">Promotion :</label>
-            <select id="promo">
-                <?php foreach($promos as $promo)
+            <select id="promo">';
+                foreach($promos as $promo)
                 {
-                    ?>
-                    <option value="<?php echo $promo["id_promo"]; ?>"><?php echo $promo["libelle"]; ?></option>
-                    <?php
+                    echo '<option value="'.$promo["Identifiant"].'">'.$promo["Libellé"].'</option>';
                 }
-                ?>
-                <option value=""></option>
+                echo '<option value=""></option>
             </select>
         </div>
         <div class="form-group">
-            <label for="rang">Rang :</label>
+            <label class="control-label" for="rang">Rang :</label>
             <input type="number" class="form-control" id="rang" />
         </div>
         <div class="form-group">
-            <label for="libelle">Libellé : </label>
+            <label class="control-label" for="libelle">Libellé : </label>
             <input type="text" class="form-control" id="libelle" placeholder="Libellé" />
         </div>
         <div class="form-group">
-            <label for="file">Fichier :</label>
+            <label class="control-label" for="file">Fichier :</label>
             <input type="file" id="file" />
         </div>
         <div class="form-group">
             <input type="submit" class="form-control" value="Ajouter le document" id="formsubmit" />
         </div>
-    </div>
+    </div>';
+                break;
+            case "Promotions":
+                echo '<div class="well">
+        <div class="form-group">
+            <label class="control-label" for="id">Identifiant :</label>
+            <input type="text" class="form-control" id="id" placeholder="Identifiant" />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="libelle">Libellé : </label>
+            <input type="text" class="form-control" id="libelle" placeholder="Libellé" />
+        </div>
+        <div class="form-group">
+            <input type="submit" class="form-control" value="Ajouter la promotion" id="formsubmit" />
+        </div>
+    </div>';
+                break;
+        }
+    ?>
 </form>
 
 <table class="table tablesorter table-striped" id="mainTable">
@@ -48,11 +72,11 @@
     <th>Opérations</th>
     </thead>
     <tbody>
-    <?php foreach ($data as $student) {
+    <?php foreach ($data as $element) {
         ?>
         <tr>
             <?php
-            foreach ($student as $field => $value) {
+            foreach ($element as $field => $value) {
                 if (is_array($value)) {
                     ?>
                     <td id="<?php echo $value["id"]; ?>"><?php echo $value["libelle"]; ?></td>
@@ -64,6 +88,7 @@
                 }
             }
             ?>
+            <td><i class="fa fa-pencil" style="cursor:pointer"></i></td>
         </tr>
         <?php
     }

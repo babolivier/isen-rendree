@@ -13,13 +13,13 @@ class Data
     private $date;
     private $ip;
 
-    function __construct($email)
+    function __construct($id)
     {
         $bdd = new Connector();
 
         $data = $bdd->Select("*", "data", array(
             "where" => array(
-                array("identifiant", "=", $email)
+                array("id", "=", $id)
             )
         ));
 
@@ -31,7 +31,7 @@ class Data
         $data = $data[0];
 
         // Chargement des informations
-        $this->identifiant = $email;
+        $this->identifiant = $data["identifiant"];
         $this->nom_fils = $data["nom_fils"];
         $this->prenom_fils = $data["prenom_fils"];
         $this->ddn_fils = $data["ddn_fils"];
@@ -232,12 +232,34 @@ class Data
     public static function getAll()
     {
         $bdd = new Connector();
-        return $bdd->Select("*", "data");
+        $datas = $bdd->Select("*", "data");
+        $toReturn = array();
+
+        foreach ($datas as $data) {
+            $doc = new Data($data["id"]);
+            array_push($toReturn, self::toArray($doc));
+        }
+
+        return $toReturn;
     }
 
     function erase()
     {
         $bdd = new Connector();
         $bdd->Delete("data", array(array("identifiant", "=", $this->identifiant)));
+    }
+
+    public static function toArray($data)
+    {
+        return array(
+            "Identifiant" => $data->identifiant,
+            "Nom" => $data->nom_fils,
+            "Prénom" => $data->prenom_fils,
+            "Date de naissance" => $data->ddn_fils,
+            "Téléphone portable" => $data->tel_mobile,
+            "Adresse courriel du parent" => $data->courriel,
+            "Date d'enregistrement" => $data->date,
+            "Adresse IP" => $data->ip
+        );
     }
 }

@@ -18,15 +18,15 @@ function add_promo()
     ]);
 }
 
-function alter_promo()
+function alter_promo($promoid)
 {
-    $promo = new Promo($_POST["id"]);
+    $promo = new Promo($promoid);
     
     $promo->setLibelle($_POST["libelle"]);
     $promo->write();
 }
 
-function delete_promo()
+function delete_promo($promoid)
 {
-    (new Promo($_POST["promo"]))->erase();
+    (new Promo($promoid))->erase();
 }

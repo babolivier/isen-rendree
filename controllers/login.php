@@ -4,6 +4,11 @@ require_once(dirname(__DIR__)."/controllers/data.php");
 require_once(dirname(__DIR__)."/models/data.class.php");
 require_once(dirname(__DIR__)."/../DbIds.php");
 
+function getAdminIdentifiers()
+{
+    return ["toto", "tata"];
+}
+
 function login()
 {
     set("title", "Login");

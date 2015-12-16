@@ -3,10 +3,9 @@
 <html>
     <head>
         <meta charset = "utf-8">
-        <title>
-            <?php echo $title; ?>
-        </title>
+        <title><?php echo $title; ?></title>
         <link rel="stylesheet" href="lib/bootstrap.min.css" />
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
         <script src="lib/jquery-2.1.4.min.js"></script>
         <script src="lib/jquery.tablesorter.min.js"></script>
         <script src="lib/bootstrap.min.js"></script>

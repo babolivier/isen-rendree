@@ -63,20 +63,25 @@ class Document
         }
 
         // Determining the folder to put the document in
-        if (strstr($filename, "A1") || strstr($filename, "A2")) {
-            error_log("A1\n");
+        if (preg_match("/A[12]/", $options["promo"])) {
             $destination = "A12/" . $filename;
-        } elseif (strstr($filename, "A3") || strstr($filename, "A4") || strstr($filename, "A5")) {
-            error_log("A3\n");
+        } elseif (preg_match("/A[345]/", $options["promo"])) {
             $destination = "A345/" . $filename;
         } else {
-            error_log("meh\n");
             $destination = $filename;
         }
 
         error_log($destination);
 
-        move_uploaded_file($document["tmp_name"], __DIR__ . "../../pdf/" . $destination);
+        if(move_uploaded_file($document["tmp_name"], __DIR__ . "/../../pdf/" . $destination))
+        {
+            echo "Uploaded!";
+        }
+        else
+        {
+            echo ":'((((";
+            error_log("Error when trying to write ".__DIR__ . "/../../pdf/" . $destination);
+        }
 
         foreach ($options as $key => $value) {
             if (empty($value) && $key != "promo") {
@@ -90,6 +95,8 @@ class Document
             "libelle" => $options["libelle"],
             "fichier" => $destination
         ));
+
+        return $destination;
     }
 
     function erase()

@@ -30,7 +30,15 @@ class Promo
     public static function getAll()
     {
         $bdd = new Connector();
-        return $bdd->Select("*", "promo");
+        $promos = $bdd->Select("*", "promo");
+        $toReturn = array();
+
+        foreach ($promos as $promo) {
+            $doc = new Promo($promo["id_promo"]);
+            array_push($toReturn, self::toArray($doc));
+        }
+
+        return $toReturn;
     }
 
     /**
@@ -110,5 +118,13 @@ class Promo
             "id_promo" => $promo["id"],
             "libelle" => $promo["libelle"]
         ));
+    }
+
+    public static function toArray($promo)
+    {
+        return array(
+            "Identifiant" => $promo->id_promo,
+            "Libellé" => $promo->libelle
+        );
     }
 }
