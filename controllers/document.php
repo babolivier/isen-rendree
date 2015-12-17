@@ -44,7 +44,8 @@ function alter_document($documentid)
     $param = $params;
     $putParams[strstr($param, "=", true)] = substr(strstr($param, "="), 1);
 
-    var_dump($putParams);
+    $doc->changePromo($putParams["promo"]);
+    $doc->changeRank($putParams["rang"]);
 }
 
 function delete_document($fileid)
