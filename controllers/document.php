@@ -25,6 +25,28 @@ function add_document()
     ));
 }
 
+function alter_document($documentid)
+{
+    $doc = new Document($documentid);
+
+    // We'll need to parse the PUT body to get our arguments
+    $params = file_get_contents("php://input", "r");
+
+    $putParams = array();
+
+    while(preg_match("/&/", $params))
+    {
+        $param = strstr($params, "&", true);
+        $params = substr(strstr($params, "&"), 1);
+        $putParams[strstr($param, "=", true)] = substr(strstr($param, "="), 1);
+    }
+    // We need it one more time for the last argument
+    $param = $params;
+    $putParams[strstr($param, "=", true)] = substr(strstr($param, "="), 1);
+
+    var_dump($putParams);
+}
+
 function delete_document($fileid)
 {
     (new Document($fileid))->erase();

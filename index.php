@@ -13,6 +13,7 @@ dispatch_post("/document",              "add_document");
 dispatch_post("/promo",                 "add_promo");
 
 dispatch_put("/data/:dataid",           "alter_data");
+dispatch_put("/document/:documentid",   "alter_document");
 dispatch_put("/promo/:promoid",         "alter_promo");
 
 dispatch_delete("/document/:fileid",    "delete_document");

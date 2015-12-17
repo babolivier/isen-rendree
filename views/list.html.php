@@ -79,7 +79,7 @@
             foreach ($element as $field => $value) {
                 if (is_array($value)) {
                     ?>
-                    <td id="<?php echo $value["id"]; ?>"><?php echo $value["libelle"]; ?></td>
+                    <td class="<?php echo $value["id"]; ?>"><?php echo $value["libelle"]; ?></td>
                     <?php
                 } else {
                     ?>
