@@ -71,15 +71,8 @@ class Document
             $destination = $filename;
         }
 
-        error_log($destination);
-
-        if(move_uploaded_file($document["tmp_name"], __DIR__ . "/../../pdf/" . $destination))
+        if(!move_uploaded_file($document["tmp_name"], __DIR__ . "/../../pdf/" . $destination))
         {
-            echo "Uploaded!";
-        }
-        else
-        {
-            echo ":'((((";
             error_log("Error when trying to write ".__DIR__ . "/../../pdf/" . $destination);
         }
 
@@ -88,6 +81,7 @@ class Document
                 throw new InvalidArgumentException("La colonne `" . $key . "` doit être définie");
             }
         }
+
         $bdd = new Connector();
         $bdd->Insert("document", array(
             "rang" => $options["rang"],
@@ -96,7 +90,16 @@ class Document
             "fichier" => $destination
         ));
 
-        return $destination;
+        $document = $bdd->Select("*", "document", array(
+            "where" => array(
+                array("fichier", "=", $destination)
+            )
+        ))[0];
+
+        return array(
+            "path" => $destination,
+            "id" => $document["id"]
+        );
     }
 
     function erase()
@@ -113,7 +116,7 @@ class Document
         // Check if promo exists
         $promo = $bdd->Select("*", "promo", array(
             "where" => array(
-                array("promo_id", "=", $newPromo)
+                array("id_promo", "=", $newPromo)
             )
         ));
 
@@ -126,7 +129,10 @@ class Document
         $this->libelle_promo = $promo[0]["libelle"];
 
         $bdd->Update("document", array(
-            "promo" => $this->promo
+            "where" => array(
+                array("id", "=", $this->id)
+            ),
+            "set" => array("promo" => $this->promo)
         ));
     }
 
@@ -138,13 +144,17 @@ class Document
         $this->rang = $newRank;
 
         $bdd->Update("document", array(
-            "rang" => $this->rang
+            "where" => array(
+                array("id", "=", $this->id)
+            ),
+            "set" => array("rang" => $this->rang)
         ));
     }
 
     public static function toArray($document)
     {
         return array(
+            "id" => $document->id,
             "Rang" => $document->rang,
             "Promotion" => array(
                 "id" => $document->promo,

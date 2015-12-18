@@ -4,6 +4,7 @@ require_once("connector.class.php");
 
 class Data
 {
+    private $id;
     private $identifiant;
     private $nom_fils;
     private $prenom_fils;
@@ -31,6 +32,7 @@ class Data
         $data = $data[0];
 
         // Chargement des informations
+        $this->id = $id;
         $this->identifiant = $data["identifiant"];
         $this->nom_fils = $data["nom_fils"];
         $this->prenom_fils = $data["prenom_fils"];
@@ -252,6 +254,7 @@ class Data
     public static function toArray($data)
     {
         return array(
+            "id" => $data->id,
             "Identifiant" => $data->identifiant,
             "Nom" => $data->nom_fils,
             "Prénom" => $data->prenom_fils,

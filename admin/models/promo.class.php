@@ -123,6 +123,7 @@ class Promo
     public static function toArray($promo)
     {
         return array(
+            "id" => $promo->id_promo,
             "Identifiant" => $promo->id_promo,
             "Libellé" => $promo->libelle
         );

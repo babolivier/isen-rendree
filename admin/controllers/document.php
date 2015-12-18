@@ -14,15 +14,13 @@ function document()
 
 function add_document()
 {
-    $filePath = Document::addDocument($_FILES["document"], [
+    $infos = Document::addDocument($_FILES["document"], [
         "rang" => $_POST["rang"],
         "promo" => $_POST["promo"],
         "libelle" => $_POST["libelle"]
     ]);
 
-    json_encode(array(
-        "path" => $filePath
-    ));
+    echo json_encode($infos);
 }
 
 function alter_document($documentid)
