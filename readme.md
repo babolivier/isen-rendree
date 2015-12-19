@@ -42,6 +42,10 @@ $libellePromo = array (
 ```
 par
 ```
+$bdd = new PDO("mysql:host=$ids[0];dbname=$ids[1]", $ids[2], $ids[3]);
+$stmt = $bdd->prepare("SELECT * FROM promo ORDER BY libelle");
+$stmt->execute();
+
 $libellePromo = array();
 foreach($stmt->fetchAll() as $promo) {
     $libellePromo[$promo["libelle"]] = $promo["id_promo"];
