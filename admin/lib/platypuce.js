@@ -6,7 +6,7 @@ function checkPromoId(promoid)
 function editRow() {
     var row = $(this).parent().parent();
     switch ($("title").html()) {
-        case "Documents":
+        case "Rentrée ISEN Brest - Documents - Administration":
             var rang = $(row.children()[0]);
             var promo = $(row.children()[1]);
             var rangValeur = rang.html();
@@ -56,7 +56,7 @@ function editRow() {
                 $(this).on("click", editRow);
             });
             break;
-        case "Promotions":
+        case "Rentrée ISEN Brest - Promotions - Administration":
             var promoName = $(row.children()[1]);
             var name = $(promoName[0]).text();
             $(promoName).html(
